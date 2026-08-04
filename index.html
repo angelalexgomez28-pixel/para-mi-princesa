@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Princesa Hermosa ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+            font-family: 'Montserrat', sans-serif;
+            color: #4a4a4a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Hearts Background Canvas/Container */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart-float {
+            position: absolute;
+            bottom: -50px;
+            color: rgba(233, 30, 99, 0.6);
+            animation: floatUp 6s linear infinite;
+            font-size: 20px;
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Container & Card Styling */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(233, 30, 99, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+
+        .header-title {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+            color: #d81b60;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        /* Photo Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .photo-card {
+            background: #fff;
+            padding: 10px 10px 25px 10px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+        }
+
+        .photo-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .photo-card:hover {
+            transform: scale(1.05) rotate(0deg);
+            z-index: 10;
+            box-shadow: 0 12px 25px rgba(216, 27, 96, 0.25);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Letter Container */
+        .letter-content {
+            text-align: left;
+            background: #fff8f9;
+            padding: 30px;
+            border-radius: 16px;
+            border-left: 5px solid #d81b60;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            color: #333;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+            white-space: pre-line;
+        }
+
+        .footer-tag {
+            margin-top: 30px;
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: #d81b60;
+        }
+
+        /* Music Floating Button / Interactive element */
+        .heart-btn {
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .heart-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 25px 15px;
+            }
+            .header-title {
+                font-size: 2.3rem;
+            }
+            .letter-content {
+                padding: 20px;
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <div class="main-container">
+        <div class="card">
+            <h1 class="header-title">Para mi Princesa Hermosa ✨</h1>
+            <p class="subtitle">1 Año y 3 Meses & Toda una Vida ❤️</p>
+
+            <!-- Galería de Fotos -->
+            <div class="gallery">
+                <div class="photo-card">
+                    <img src="foto1.jpeg" alt="Nosotros 1">
+                </div>
+                <div class="photo-card">
+                    <img src="foto2.jpeg" alt="Nosotros 2">
+                </div>
+                <div class="photo-card">
+                    <img src="foto3.jpeg" alt="Nosotros 3">
+                </div>
+                <div class="photo-card">
+                    <img src="foto4.jpeg" alt="Nosotros 4">
+                </div>
+                <div class="photo-card">
+                    <img src="foto5.jpeg" alt="Nosotros 5">
+                </div>
+            </div>
+
+            <!-- Carta -->
+            <div class="letter-content">
+Bueno mi amor, actualmente no me encuentro en la mejor posición para darte algo que te mereces, pero sé que entiendes eso mejor que nadie; todo lo que pasé y sigo pasando. Eso amo de ti: tu comprensión y el amor que me das a pesar de todo.
+
+Tú eres lo que tanto soñé en una mujer, tienes todo, de hecho superaste todas mis expectativas. Ahorita no tengo lujos, no tengo dinero, prácticamente no tengo nada material. Antes lo poco que tenía, con todo el gusto del mundo te lo daba; ahora no tengo prácticamente nada y me duele mucho no poder sorprenderte con algún detalle que cada mes te daba. Pero como eres una maravillosa mujer, siempre me hiciste sentir que todo lo material no te importa mientras estemos juntos, y tienes razón amor; de hecho tienes razón en todas las cosas que me dices. Por eso te amo, porque siempre me haces entrar en razón aunque muchas veces tuve que tragar mi orgullo y aceptar que estoy equivocado aunque no lo creas.
+
+Ahora volviendo un poquito a cuando nos conocimos, no fue un inicio tan bonito. Empezamos de una manera tan diferente: tú y yo estábamos en diferentes relaciones, tú conocías a mi pareja y yo al tuyo. Sé que siempre nos brotará una sonrisa cada que recordemos estas cosas, como cuando de broma te dije que me adoptes y lo tomaste muy literal. Yo la verdad no sabía qué hacer en ese momento, quería desaparecer pero te veías emocionada, era un sentimiento extraño para mí. Recuerdo cuando le dijiste en su cara a mi pareja en ese entonces que te hacía caso en todo y cosas así, yo por dentro estaba rogando que no dijeras nada más jejjee, fue demasiado chistoso.
+
+Ese día de seguro mataste a mi ex pareja, fue tanto que me prohibió verte, pero era inevitable no hacerlo; te apreciaba tanto que no sabía cómo explicarlo o expresarlo. Esa vez que fuimos a ese lugar por el barrio chino, te vi caminar de espaldas... era inevitable no ver tu cuerpo, la forma de tu caminar tan coqueta (y sí, tu forma de caminar es muy coqueta mi amor) y me gusta, ese caminar resalta tu figura. Eso fue lo que me impregnó la primera vez que te vi en el salón también. Pero sí, ese día que te vi caminar de espaldas vi tu espalda; estabas con un top plomo que no cubría toda tu espalda. Tuve que desviar mi mirada por respeto, pero mi corazón estaba desesperado por ir a tus brazos, aunque aún no era el momento... hasta el día que tuve que aceptar que estaba celoso, y demasiado. Tanto fue que quería sacarte de mi vida para siempre, pero no se pudo; creo que llegamos a hablar de igual forma como ahora, a pesar de todos los malentendidos que hemos tenido, al final como tú dices, es difícil mantenernos así por mucho tiempo.
+
+Pero sí amor, como ya te conté esta historia de cómo te fui amando varias veces y que siempre te contaré cada que pueda, quiero que sepas que nunca me enamoré tanto de una persona, nunca me comporté como lo hago contigo, nunca saqué ese lado infantil que tengo. En vez de verme mal, tú solo me tratas como un bebé y amo eso de ti, me haces sentir tan pero tan amado. Por eso a veces se me hace tan pequeño cada cosa que te fui dando en estos meses que vamos juntos.
+
+Sé que aún es 1 año con 3 meses, pero sé que vamos a estar juntos por muchas décadas más, porque te amo demasiado, con todo mi ser, princesa hermosa. 💕
+            </div>
+
+            <button class="heart-btn" onclick="lloverMasCorazones()">
+                💖 ¡Llenar de más amor! 💖
+            </button>
+
+            <div class="footer-tag">Siempre juntos 💕</div>
+        </div>
+    </div>
+
+    <script>
+        // Lluvia dinámica de corazones
+        const container = id => document.getElementById(id);
+        const heartsContainer = container('heartsContainer');
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-float');
+            
+            const heartIcons = ['❤️', '💖', '💗', '💓', '💕', '🌸', '✨'];
+            heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        // Crear corazones continuamente
+        setInterval(createHeart, 300);
+
+        function lloverMasCorazones() {
+            for(let i = 0; i < 35; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
