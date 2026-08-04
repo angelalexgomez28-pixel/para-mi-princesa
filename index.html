@@ -13,15 +13,15 @@
         }
 
         body {
-            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 50%, #ce93d8 100%);
             font-family: 'Montserrat', sans-serif;
-            color: #4a4a4a;
+            color: #4a148c;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Floating Hearts Background Canvas/Container */
+        /* Lluvia de corazones morados */
         .hearts-container {
             position: fixed;
             top: 0;
@@ -36,7 +36,7 @@
         .heart-float {
             position: absolute;
             bottom: -50px;
-            color: rgba(233, 30, 99, 0.6);
+            color: rgba(142, 36, 170, 0.6);
             animation: floatUp 6s linear infinite;
             font-size: 20px;
             user-select: none;
@@ -53,129 +53,298 @@
             }
         }
 
-        /* Container & Card Styling */
+        /* Contenedor principal */
         .main-container {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 850px;
             margin: 40px auto;
             padding: 20px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.93);
             backdrop-filter: blur(10px);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 40px 30px;
-            box-shadow: 0 20px 40px rgba(233, 30, 99, 0.15);
+            box-shadow: 0 20px 45px rgba(106, 27, 154, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.8);
             text-align: center;
         }
 
         .header-title {
             font-family: 'Caveat', cursive;
-            font-size: 3rem;
-            color: #d81b60;
-            margin-bottom: 10px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            font-size: 3.4rem;
+            color: #7b1fa2;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.08);
         }
 
         .subtitle {
             font-size: 0.95rem;
-            color: #888;
+            color: #8e24aa;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 30px;
+            font-weight: 600;
         }
 
-        /* Photo Gallery Grid */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        /* Sección Interactiva de Fotos */
+        .interactive-gallery-intro {
+            font-size: 1.1rem;
+            color: #6a1b9a;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
             gap: 15px;
+            justify-content: center;
             margin-bottom: 35px;
         }
 
-        .photo-card {
-            background: #fff;
-            padding: 10px 10px 25px 10px;
-            border-radius: 12px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
-            transform: rotate(-2deg);
-            transition: all 0.3s ease;
+        .photo-wrapper {
+            perspective: 1000px;
+            width: 130px;
+            height: 130px;
         }
 
-        .photo-card:nth-child(even) {
-            transform: rotate(2deg);
-        }
-
-        .photo-card:hover {
-            transform: scale(1.05) rotate(0deg);
-            z-index: 10;
-            box-shadow: 0 12px 25px rgba(216, 27, 96, 0.25);
-        }
-
-        .photo-card img {
+        .photo-btn {
             width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
+            height: 100%;
+            background: linear-gradient(135deg, #ab47bc, #8e24aa);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(123, 31, 162, 0.3);
+            font-size: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        /* Letter Container */
+        .photo-btn span {
+            font-size: 0.75rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .photo-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(123, 31, 162, 0.4);
+            background: linear-gradient(135deg, #ba68c8, #9c27b0);
+        }
+
+        /* Modal para ver fotos ampliadas */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(40, 10, 60, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            animation: popIn 0.3s ease-out;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-card img {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 3px solid #e1bee7;
+        }
+
+        .modal-quote {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            color: #7b1fa2;
+            margin-bottom: 15px;
+        }
+
+        .close-btn {
+            background: #8e24aa;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #6a1b9a;
+        }
+
+        /* Carta interactiva con frases sorpresas */
         .letter-content {
             text-align: left;
-            background: #fff8f9;
+            background: #fdf7ff;
             padding: 30px;
-            border-radius: 16px;
-            border-left: 5px solid #d81b60;
+            border-radius: 20px;
+            border-left: 6px solid #8e24aa;
             line-height: 1.8;
             font-size: 1.05rem;
-            color: #333;
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
-            white-space: pre-line;
+            color: #3c096c;
+            box-shadow: inset 0 2px 8px rgba(123, 31, 162, 0.05);
+            margin-bottom: 30px;
+        }
+
+        /* Botones sorpresas entre el texto */
+        .surprise-inline-btn {
+            background: linear-gradient(135deg, #ce93d8, #ab47bc);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            box-shadow: 0 3px 8px rgba(142, 36, 170, 0.2);
+        }
+
+        .surprise-inline-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #ba68c8, #8e24aa);
+        }
+
+        /* Bloque de Sorpresas Mágicas */
+        .surprises-section {
+            background: #f3e5f5;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .surprises-title {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            color: #6a1b9a;
+            margin-bottom: 15px;
+        }
+
+        .buttons-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .magic-btn {
+            background: white;
+            color: #7b1fa2;
+            border: 2px solid #ba68c8;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .magic-btn:hover {
+            background: #8e24aa;
+            color: white;
+            border-color: #8e24aa;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(142, 36, 170, 0.3);
+        }
+
+        /* Botón gigante de más amor */
+        .heart-btn {
+            background: linear-gradient(45deg, #8e24aa, #ba68c8);
+            color: white;
+            border: none;
+            padding: 16px 36px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(142, 36, 170, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .heart-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(142, 36, 170, 0.5);
         }
 
         .footer-tag {
             margin-top: 30px;
             font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            color: #d81b60;
+            font-size: 2.4rem;
+            color: #7b1fa2;
         }
 
-        /* Music Floating Button / Interactive element */
-        .heart-btn {
-            background: linear-gradient(45deg, #e91e63, #ff4081);
+        /* Caja de alerta interactiva bonita */
+        .toast-msg {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #4a148c;
             color: white;
-            border: none;
             padding: 14px 28px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2000;
+            pointer-events: none;
+            text-align: center;
+            max-width: 90%;
         }
 
-        .heart-btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 10px 25px rgba(233, 30, 99, 0.5);
+        .toast-msg.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
         @media (max-width: 600px) {
-            .card {
-                padding: 25px 15px;
-            }
-            .header-title {
-                font-size: 2.3rem;
-            }
-            .letter-content {
-                padding: 20px;
-                font-size: 0.98rem;
-            }
+            .card { padding: 25px 15px; }
+            .header-title { font-size: 2.6rem; }
+            .photo-wrapper { width: 100px; height: 100px; }
+            .photo-btn { font-size: 1.4rem; }
+            .letter-content { padding: 20px; font-size: 0.98rem; }
         }
     </style>
 </head>
@@ -186,60 +355,111 @@
     <div class="main-container">
         <div class="card">
             <h1 class="header-title">Para mi Princesa Hermosa ✨</h1>
-            <p class="subtitle">1 Año y 3 Meses & Toda una Vida ❤️</p>
+            <p class="subtitle">1 Año y 3 Meses & Toda una Vida 💜</p>
 
-            <!-- Galería de Fotos -->
-            <div class="gallery">
-                <div class="photo-card">
-                    <img src="foto1.jpeg" alt="Nosotros 1">
+            <!-- Galería interactiva con botones para abrir fotos -->
+            <p class="interactive-gallery-intro">📸 Toca cada botón para desbloquear nuestros momentos juntos:</p>
+            <div class="gallery-grid">
+                <div class="photo-wrapper">
+                    <button class="photo-btn" onclick="openPhoto('foto1.jpeg', '✨ Nuestro momento especial #1')">
+                        <span>📸 Recuerdo 1</span>
+                        💜 Abrir
+                    </button>
                 </div>
-                <div class="photo-card">
-                    <img src="foto2.jpeg" alt="Nosotros 2">
+                <div class="photo-wrapper">
+                    <button class="photo-btn" onclick="openPhoto('foto2.jpeg', '👑 Tu sonrisa que me enamora')">
+                        <span>📸 Recuerdo 2</span>
+                        💜 Abrir
+                    </button>
                 </div>
-                <div class="photo-card">
-                    <img src="foto3.jpeg" alt="Nosotros 3">
+                <div class="photo-wrapper">
+                    <button class="photo-btn" onclick="openPhoto('foto3.jpeg', '🌸 Juntos por siempre')">
+                        <span>📸 Recuerdo 3</span>
+                        💜 Abrir
+                    </button>
                 </div>
-                <div class="photo-card">
-                    <img src="foto4.jpeg" alt="Nosotros 4">
+                <div class="photo-wrapper">
+                    <button class="photo-btn" onclick="openPhoto('foto4.jpeg', '💫 Mi lugar seguro eres tú')">
+                        <span>📸 Recuerdo 4</span>
+                        💜 Abrir
+                    </button>
                 </div>
-                <div class="photo-card">
-                    <img src="foto5.jpeg" alt="Nosotros 5">
+                <div class="photo-wrapper">
+                    <button class="photo-btn" onclick="openPhoto('foto5.jpeg', '💕 El amor de mi vida')">
+                        <span>📸 Recuerdo 5</span>
+                        💜 Abrir
+                    </button>
                 </div>
             </div>
 
-            <!-- Carta -->
+            <!-- Carta con botones de frases intercalados -->
             <div class="letter-content">
 Bueno mi amor, actualmente no me encuentro en la mejor posición para darte algo que te mereces, pero sé que entiendes eso mejor que nadie; todo lo que pasé y sigo pasando. Eso amo de ti: tu comprensión y el amor que me das a pesar de todo.
 
+<button class="surprise-inline-btn" onclick="showToast('💖 ¡Eres mi mayor bendición y mi orgullo!')">✨ Toca aquí amor</button>
+
 Tú eres lo que tanto soñé en una mujer, tienes todo, de hecho superaste todas mis expectativas. Ahorita no tengo lujos, no tengo dinero, prácticamente no tengo nada material. Antes lo poco que tenía, con todo el gusto del mundo te lo daba; ahora no tengo prácticamente nada y me duele mucho no poder sorprenderte con algún detalle que cada mes te daba. Pero como eres una maravillosa mujer, siempre me hiciste sentir que todo lo material no te importa mientras estemos juntos, y tienes razón amor; de hecho tienes razón en todas las cosas que me dices. Por eso te amo, porque siempre me haces entrar en razón aunque muchas veces tuve que tragar mi orgullo y aceptar que estoy equivocado aunque no lo creas.
+
+<button class="surprise-inline-btn" onclick="showToast('👑 Gracias por amarme tal y como soy')">💜 Un secreto para ti</button>
 
 Ahora volviendo un poquito a cuando nos conocimos, no fue un inicio tan bonito. Empezamos de una manera tan diferente: tú y yo estábamos en diferentes relaciones, tú conocías a mi pareja y yo al tuyo. Sé que siempre nos brotará una sonrisa cada que recordemos estas cosas, como cuando de broma te dije que me adoptes y lo tomaste muy literal. Yo la verdad no sabía qué hacer en ese momento, quería desaparecer pero te veías emocionada, era un sentimiento extraño para mí. Recuerdo cuando le dijiste en su cara a mi pareja en ese entonces que te hacía caso en todo y cosas así, yo por dentro estaba rogando que no dijeras nada más jejjee, fue demasiado chistoso.
 
+<button class="surprise-inline-btn" onclick="showToast('🤭 Ese momento me marcó para siempre')">✨ Toca para recordar</button>
+
 Ese día de seguro mataste a mi ex pareja, fue tanto que me prohibió verte, pero era inevitable no hacerlo; te apreciaba tanto que no sabía cómo explicarlo o expresarlo. Esa vez que fuimos a ese lugar por el barrio chino, te vi caminar de espaldas... era inevitable no ver tu cuerpo, la forma de tu caminar tan coqueta (y sí, tu forma de caminar es muy coqueta mi amor) y me gusta, ese caminar resalta tu figura. Eso fue lo que me impregnó la primera vez que te vi en el salón también. Pero sí, ese día que te vi caminar de espaldas vi tu espalda; estabas con un top plomo que no cubría toda tu espalda. Tuve que desviar mi mirada por respeto, pero mi corazón estaba desesperado por ir a tus brazos, aunque aún no era el momento... hasta el día que tuve que aceptar que estaba celoso, y demasiado. Tanto fue que quería sacarte de mi vida para siempre, pero no se pudo; creo que llegamos a hablar de igual forma como ahora, a pesar de todos los malentendidos que hemos tenido, al final como tú dices, es difícil mantenernos así por mucho tiempo.
 
-Pero sí amor, como ya te conté esta historia de cómo te fui amando varias veces y que siempre te contaré cada que pueda, quiero que sepas que nunca me enamoré tanto de una persona, nunca me comporté como lo hago contigo, nunca saqué ese lado infantil que tengo. En vez de verme mal, tú solo me tratas como un bebé y amo eso de ti, me haces sentir tan pero tan amado. Por eso a veces se me hace tan pequeño cada cosa que te fui dando en estos meses que vamos juntos.
+<button class="surprise-inline-btn" onclick="showToast('💓 Mi corazón siempre fue tuyo, desde el primer día')">💜 Te confieso algo</button>
 
-Sé que aún es 1 año con 3 meses, pero sé que vamos a estar juntos por muchas décadas más, porque te amo demasiado, con todo mi ser, princesa hermosa. 💕
+Pero sí amor, como ya te conté esta historia de cómo te fui amando varias veces y que siempre te contaré cada que pueda, quiero que sepas que nunca me enamoré tanto de una persona, nunca me comporté como lo hago contigo, nunca saqué ese lado infantil que tengo. En vez de verme mal, tú solo me tratas como un bebé y amo eso de ti, me me haces sentir tan pero tan amado. Por eso a veces se me hace tan pequeño cada cosa que te fui dando en estos meses que vamos juntos.
+
+Sé que aún es 1 año con 3 meses, pero sé que vamos a estar juntos por muchas décadas más, porque te amo demasiado, con todo el gusto, princesa hermosa. 💕
+            </div>
+
+            <!-- Sección interactiva de Sorpresas -->
+            <div class="surprises-section">
+                <h2 class="surprises-title">🎁 Sorpresas especiales para ti</h2>
+                <div class="buttons-grid">
+                    <button class="magic-btn" onclick="showToast('🔒 Promesa: Siempre te cuidaré y te amaré incondicionalmente.')">📜 Nuestra Promesa</button>
+
+                    <button class="magic-btn" onclick="showToast('⭐ Razón #1: Amo tu manera tan dulce de cuidarme.')">⭐ Razón #1</button>
+
+                    <button class="magic-btn" onclick="showToast('🌟 Razón #2: Amo tu forma coqueta de caminar que me vuelve loco.')">🌟 Razón #2</button>
+
+                    <button class="magic-btn" onclick="showToast('✨ Razón #3: Amo cómo me tratas y sacas mi lado más tierno.')">✨ Razón #3</button>
+
+                    <button class="magic-btn" onclick="showToast('🔮 Nuestro Futuro: Viajar juntos, superar todo y construir una vida feliz.')">🔮 Un Deseo Juntos</button>
+                </div>
             </div>
 
             <button class="heart-btn" onclick="lloverMasCorazones()">
-                💖 ¡Llenar de más amor! 💖
+                💜 ¡Llenar de más amor morado! 💜
             </button>
 
-            <div class="footer-tag">Siempre juntos 💕</div>
+            <div class="footer-tag">Siempre juntos mi vida 💕</div>
         </div>
     </div>
 
+    <!-- Modal de Fotos -->
+    <div class="modal-overlay" id="photoModal">
+        <div class="modal-card">
+            <img id="modalImg" src="" alt="Foto">
+            <div class="modal-quote" id="modalQuote"></div>
+            <button class="close-btn" onclick="closePhoto()">Cerrar con amor 💜</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-msg" id="toastMsg"></div>
+
     <script>
-        // Lluvia dinámica de corazones
-        const container = id => document.getElementById(id);
-        const heartsContainer = container('heartsContainer');
+        // Lluvia dinámica de corazones morados
+        const heartsContainer = document.getElementById('heartsContainer');
 
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-float');
             
-            const heartIcons = ['❤️', '💖', '💗', '💓', '💕', '🌸', '✨'];
+            const heartIcons = ['💜', '🔮', '🦄', '🔮', '💜', '✨', '🌸', '💫'];
             heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
             
             heart.style.left = Math.random() * 100 + 'vw';
@@ -253,13 +473,39 @@ Sé que aún es 1 año con 3 meses, pero sé que vamos a estar juntos por muchas
             }, 7000);
         }
 
-        // Crear corazones continuamente
         setInterval(createHeart, 300);
 
         function lloverMasCorazones() {
-            for(let i = 0; i < 35; i++) {
-                setTimeout(createHeart, i * 50);
+            for(let i = 0; i < 40; i++) {
+                setTimeout(createHeart, i * 40);
             }
+        }
+
+        // Abrir Modal de Fotos
+        function openPhoto(src, quote) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('modalQuote').innerText = quote;
+            document.getElementById('photoModal').style.display = 'flex';
+            lloverMasCorazones();
+        }
+
+        function closePhoto() {
+            document.getElementById('photoModal').style.display = 'none';
+        }
+
+        // Mensajes tipo flotantes (Toast)
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toastMsg');
+            toast.innerText = message;
+            toast.classList.add('show');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+
+            lloverMasCorazones();
         }
     </script>
 </body>
